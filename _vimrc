@@ -80,8 +80,8 @@ else
 
 endif " has("autocmd")
 
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set backup
 set number
 set expandtab
@@ -97,6 +97,7 @@ set path=./**
 
 set ignorecase smartcase
 set wmh=0 
+set hidden
 
 filetype plugin on
 
@@ -105,3 +106,8 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strf
 
 call pathogen#infect()
 cd c:/Users/Matt/Dropbox/Development
+
+autocmd VimEnter * NERDTree
+autocmd BufEnter * NERDTreeMirror
+
+autocmd VimEnter * wincmd w
