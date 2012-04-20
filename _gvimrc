@@ -67,4 +67,6 @@ if version >= 500
   au GUIEnter * simalt ~x
   set dir=c:/Users/Matt/.vim/backups
   set bdir=c:/Users/Matt/.vim/backups
+
+  set visualbell t_vb=
 endif

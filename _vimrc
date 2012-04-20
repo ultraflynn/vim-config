@@ -107,6 +107,8 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strf
 call pathogen#infect()
 cd c:/Users/Matt/Dropbox/Development
 
+set noerrorbells vb t_vb=
+
 autocmd VimEnter * NERDTree
 autocmd BufEnter * NERDTreeMirror
 
