@@ -56,10 +56,9 @@ if version >= 500
   highlight Constant gui=NONE guibg=grey95
   highlight Special gui=NONE guibg=grey95
 
-  " bigginm settings
   colorscheme evening
   if has('gui_running')
-      set guifont=Consolas:h15
+    set guifont=Consolas:h15
+    au GUIEnter * simalt ~x
   endif
-  au GUIEnter * simalt ~x
 endif
