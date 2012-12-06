@@ -62,15 +62,4 @@ if version >= 500
       set guifont=Consolas:h15
   endif
   au GUIEnter * simalt ~x
-  set number
-  set expandtab
-  set tabstop=4
-  set softtabstop=4
-  set shiftwidth=4
-  set nobackup
-
-  filetype on
-  filetype plugin on
-  filetype indent on
-  call pathogen#infect()
 endif

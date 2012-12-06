@@ -15,6 +15,7 @@ if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
 else
   set backup		" keep a backup file
+  set backupdir=c:\bigginm\.vim\backups
 endif
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
@@ -72,8 +73,6 @@ endif " has("autocmd")
 
 " Configure the runtime path to pick up my vim configuration from GitHub
 set runtimepath=C:\bigginm\GitHub\vim-config,$VIM,$VIMRUNTIME
-
-set backup
 set number
 set fileformat=dos
 
@@ -82,8 +81,9 @@ source $VIMRUNTIME/mswin.vim
 set path=./**
 
 set ignorecase smartcase
-
 filetype plugin on
+filetype on
+filetype indent on
 
 set laststatus=2
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")} 
@@ -146,5 +146,3 @@ function! <SID>StripTrailingWhitespaces()
     let @/=_s
     call cursor(l, c)
 endfunction
-
-
