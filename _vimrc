@@ -89,13 +89,17 @@ set laststatus=2
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")} 
 
 call pathogen#infect()
-cd c:/bigginm/dev
+
+" Need to find a way of dealing with this on a per-PC basis
+cd c:/bigginm/dev/action/source/fitp-server
 
 " Whitespace settings
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
+
+set nowrap
 
 " Set tabstop, softtabstop and shiftwidth to the same value
 command! -nargs=* Stab call Stab()
@@ -146,3 +150,8 @@ function! <SID>StripTrailingWhitespaces()
     let @/=_s
     call cursor(l, c)
 endfunction
+
+"CtrlP settings
+set wildignore+=*\\target\\*,*.class,*.jar,*.exe,*.zip
+let g:ctrlp_max_files=0
+let g:ctrlp_working_path_mode=''
