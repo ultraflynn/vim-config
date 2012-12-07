@@ -155,3 +155,11 @@ endfunction
 set wildignore+=*\\target\\*,*.class,*.jar,*.exe,*.zip
 let g:ctrlp_max_files=0
 let g:ctrlp_working_path_mode=''
+
+" Toggle spell checking on and off with `,s`
+let mapleader = ","
+nmap <silent> <leader>s :set spell!<CR>
+ 
+" Set region to British English
+set spelllang=en_gb
+
