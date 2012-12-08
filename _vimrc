@@ -11,16 +11,12 @@ set nocompatible
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
-if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
-else
-  set backup		" keep a backup file
-  set backupdir=c:\bigginm\.vim\backups
-endif
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
+set nobackup
+set history=50	" keep 50 lines of command line history
+set ruler		    " show the cursor position all the time
+set showcmd		  " display incomplete commands
 set incsearch		" do incremental searching
+set ch=2		    " Make command line two lines high
 
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 " let &guioptions = substitute(&guioptions, "t", "", "g")
@@ -32,36 +28,23 @@ map Q gq
 " text is lost and it only works for putting the current register.
 "vnoremap p "_dp
 
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-endif
-
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
 
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
-
   " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
-  au!
+    au!
 
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
+    " For all text files set 'textwidth' to 78 characters.
+    autocmd FileType text setlocal textwidth=78
 
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid or when inside an event handler
+    " (happens when dropping a file on gvim).
+    autocmd BufReadPost *
+          \ if line("'\"") > 0 && line("'\"") <= line("$") |
+          \   exe "normal g`\"" |
+          \ endif
 
   augroup END
 
@@ -72,7 +55,7 @@ else
 endif " has("autocmd")
 
 " Configure the runtime path to pick up my vim configuration from GitHub
-set runtimepath=C:\bigginm\GitHub\vim-config,$VIM,$VIMRUNTIME
+set runtimepath=C:\bigginm\GitHub\vim-config,C:\Users\Matt\vimfiles,$VIM,$VIMRUNTIME
 set number
 set fileformat=dos
 
@@ -89,9 +72,15 @@ set laststatus=2
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")} 
 
 call pathogen#infect()
+syntax on
+set hlsearch
+filetype plugin indent on
+
 
 " Need to find a way of dealing with this on a per-PC basis
-cd c:/bigginm/dev/action/source/fitp-server
+"cd c:/bigginm/dev/action/source/fitp-server
+
+colorscheme evening
 
 " Whitespace settings
 set tabstop=2
@@ -112,7 +101,7 @@ function! Stab()
   endif
   call SummarizeTabs()
 endfunction
-  
+
 function! SummarizeTabs()
   try
     echohl ModeMsg
@@ -131,7 +120,7 @@ endfunction
 
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
- 
+
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:?\ ,eol:¬
 
@@ -140,15 +129,15 @@ highlight NonText guifg=#4a4a59
 highlight SpecialKey guifg=#4a4a59
 
 function! <SID>StripTrailingWhitespaces()
-    " Preparation: save last search, and cursor position.
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " Do the business:
-    %s/\s\+$//e
-    " Clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  %s/\s\+$//e
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
 endfunction
 
 "CtrlP settings
@@ -159,7 +148,36 @@ let g:ctrlp_working_path_mode=''
 " Toggle spell checking on and off with `,s`
 let mapleader = ","
 nmap <silent> <leader>s :set spell!<CR>
- 
+
 " Set region to British English
 set spelllang=en_gb
+
+" Source the vimrc file after saving it
+if has("autocmd")
+  autocmd bufwritepost .vimrc source $MYVIMRC
+endif
+
+let mapleader = ","
+nmap <leader>v :tabedit $MYVIMRC<CR>
+
+" Show syntax highlighting groups for word under cursor
+nmap <C-S-P> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
+if exists('*HexHighlight()')
+  nmap <leader>h :call HexHighlight()<Return>
+endif
+
+" I like highlighting strings inside C comments
+let c_comment_strings=1
+
+set guifont=Consolas:h15
+
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
 
