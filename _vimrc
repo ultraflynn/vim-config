@@ -80,7 +80,7 @@ elseif hostname() == "LONWD013582"
   cd c:/bigginm/dev/action/source/fitp-server
 endif
 
-colorscheme evening
+colorscheme jellybeans
 
 " Whitespace settings
 set tabstop=2
