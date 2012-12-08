@@ -30,7 +30,6 @@ map Q gq
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
-
   " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
     au!
@@ -45,9 +44,7 @@ if has("autocmd")
           \ if line("'\"") > 0 && line("'\"") <= line("$") |
           \   exe "normal g`\"" |
           \ endif
-
   augroup END
-
 else
 
   set autoindent		" always set autoindenting on
@@ -76,9 +73,12 @@ syntax on
 set hlsearch
 filetype plugin indent on
 
-
-" Need to find a way of dealing with this on a per-PC basis
-"cd c:/bigginm/dev/action/source/fitp-server
+" Set the working directory based on the machine, default is not to set one
+if hostname() == "SARK"
+  cd c:/Users/Matt/Dropbox/Development
+elseif hostname() == "LONWD013582"
+  cd c:/bigginm/dev/action/source/fitp-server
+endif
 
 colorscheme evening
 
