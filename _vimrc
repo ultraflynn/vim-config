@@ -80,6 +80,13 @@ elseif hostname() == "LONWD013582"
   cd c:/bigginm/dev/action/source/fitp-server
 endif
 
+let mapleader = ","
+if hostname() == "LONWD013582"
+  nmap <leader>v :tabedit C:/bigginm/GitHub/vim-config/_vimrc<CR>
+else
+  nmap <leader>v :tabedit $MYVIMRC<CR>
+endif
+
 colorscheme jellybeans
 
 " Whitespace settings
@@ -146,7 +153,6 @@ let g:ctrlp_max_files=0
 let g:ctrlp_working_path_mode=''
 
 " Toggle spell checking on and off with `,s`
-let mapleader = ","
 nmap <silent> <leader>s :set spell!<CR>
 
 " Set region to British English
@@ -156,9 +162,6 @@ set spelllang=en_gb
 if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
 endif
-
-let mapleader = ","
-nmap <leader>v :tabedit $MYVIMRC<CR>
 
 " Show syntax highlighting groups for word under cursor
 nmap <C-S-P> :call <SID>SynStack()<CR>
