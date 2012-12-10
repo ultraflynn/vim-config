@@ -18,3 +18,6 @@
 	path = bundle/vim-unimpaired
 	url = https://github.com/tpope/vim-unimpaired.git
   ignore = dirty
+[submodule "bundle/linediff.vim"]
+	path = bundle/linediff.vim
+	url = https://github.com/AndrewRadev/linediff.vim.git
