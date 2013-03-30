@@ -52,7 +52,14 @@ else
 endif " has("autocmd")
 
 " Configure the runtime path to pick up my vim configuration from GitHub
-set runtimepath=C:\bigginm\GitHub\vim-config,C:\Users\Matt\vimfiles,$VIM,$VIMRUNTIME
+if hostname() == "SARK"
+  set runtimepath=C:\Users\Matt\vimfiles,$VIM,$VIMRUNTIME
+elseif hostname() == "LONWD013582"
+  set runtimepath=C:\bigginm\GitHub\vim-config,$VIM,$VIMRUNTIME
+elseif hostname() == "raspberrypi"
+  set runtimepath=~/github/vim-config,$VIM,$VIMRUNTIME
+endif
+
 set number
 set fileformat=dos
 
@@ -78,6 +85,8 @@ if hostname() == "SARK"
   cd c:/Users/Matt/Dropbox/Development
 elseif hostname() == "LONWD013582"
   cd c:/bigginm/dev/action/source/fitp-server
+elseif hostname() == "raspberrypi"
+  cd ~/github
 endif
 
 let mapleader = ","
