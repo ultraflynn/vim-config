@@ -96,7 +96,11 @@ else
   nmap <leader>v :tabedit $MYVIMRC<CR>
 endif
 
-colorscheme jellybeans
+if hostname() == "raspberrypi"
+  colorscheme koehler
+else
+  colorscheme jellybeans
+endif
 
 " Whitespace settings
 set tabstop=2
